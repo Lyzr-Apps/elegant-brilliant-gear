@@ -251,7 +251,7 @@ export default function HomePage() {
   const scorePercentage = (quizState.score / quizState.totalQuestions) * 100
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 to-indigo-500 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-red-600 to-red-500 flex items-center justify-center p-4">
       {/* SETUP SCREEN */}
       {screen === 'setup' && (
         <Card className="w-full max-w-md rounded-3xl border-0 shadow-lg">
@@ -271,7 +271,7 @@ export default function HomePage() {
                 placeholder="e.g., Mathematics, Science, History"
                 value={quizState.topic}
                 onChange={e => setQuizState(prev => ({ ...prev, topic: e.target.value }))}
-                className="rounded-xl px-4 py-3 border-gray-300 focus:border-indigo-600 focus:ring-indigo-600"
+                className="rounded-xl px-4 py-3 border-gray-300 focus:border-red-600 focus:ring-red-600"
               />
             </div>
 
@@ -286,7 +286,7 @@ export default function HomePage() {
                     onClick={() => setQuizState(prev => ({ ...prev, difficulty: diff }))}
                     className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all ${
                       quizState.difficulty === diff
-                        ? 'bg-indigo-600 text-white shadow-lg'
+                        ? 'bg-red-600 text-white shadow-lg'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -307,7 +307,7 @@ export default function HomePage() {
                     onClick={() => setQuizState(prev => ({ ...prev, questionCount: count }))}
                     className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all ${
                       quizState.questionCount === count
-                        ? 'bg-indigo-600 text-white shadow-lg'
+                        ? 'bg-red-600 text-white shadow-lg'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
@@ -320,7 +320,7 @@ export default function HomePage() {
             <Button
               onClick={startQuiz}
               disabled={!quizState.topic.trim()}
-              className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl mt-4"
+              className="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl mt-4"
             >
               Start Quiz
               <ChevronRight className="w-5 h-5 ml-2" />
@@ -375,7 +375,7 @@ export default function HomePage() {
                             : showIncorrect
                             ? 'bg-red-500 text-white border-2 border-red-600'
                             : isSelected
-                            ? 'bg-indigo-600 text-white border-2 border-indigo-700'
+                            ? 'bg-red-600 text-white border-2 border-red-700'
                             : 'bg-gray-100 text-gray-900 border-2 border-gray-200 hover:bg-gray-200'
                         }`}
                       >
@@ -405,14 +405,14 @@ export default function HomePage() {
                   <Button
                     onClick={submitAnswer}
                     disabled={quizState.selectedAnswer === null}
-                    className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl"
+                    className="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl"
                   >
                     Submit
                   </Button>
                 ) : (
                   <Button
                     onClick={nextQuestion}
-                    className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl"
+                    className="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl"
                   >
                     {quizState.currentQuestionIndex === quizState.totalQuestions - 1
                       ? 'See Results'
@@ -437,14 +437,14 @@ export default function HomePage() {
               {/* Circular Score */}
               <div className="flex justify-center mb-8">
                 <div className="relative w-40 h-40 flex items-center justify-center">
-                  <div className="absolute w-40 h-40 rounded-full border-8 border-indigo-200"></div>
-                  <div className="absolute w-40 h-40 rounded-full border-8 border-transparent border-t-8 border-t-indigo-600 border-r-8 border-r-indigo-600"
+                  <div className="absolute w-40 h-40 rounded-full border-8 border-red-200"></div>
+                  <div className="absolute w-40 h-40 rounded-full border-8 border-transparent border-t-8 border-t-red-600 border-r-8 border-r-red-600"
                     style={{
                       clipPath: `polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 50%)`
                     }}
                   ></div>
                   <div className="text-center z-10">
-                    <div className="text-5xl font-bold text-indigo-600">
+                    <div className="text-5xl font-bold text-red-600">
                       {quizState.score}
                     </div>
                     <div className="text-gray-600 text-sm">
@@ -464,7 +464,7 @@ export default function HomePage() {
                       cy="100"
                       r="90"
                       fill="none"
-                      stroke="#4F46E5"
+                      stroke="#DC2626"
                       strokeWidth="12"
                       strokeDasharray={`${(scorePercentage / 100) * (2 * Math.PI * 90)} ${2 * Math.PI * 90}`}
                       strokeLinecap="round"
@@ -472,7 +472,7 @@ export default function HomePage() {
                     />
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <div className="text-5xl font-bold text-indigo-600">
+                    <div className="text-5xl font-bold text-red-600">
                       {Math.round(scorePercentage)}%
                     </div>
                     <div className="text-gray-600 text-sm mt-2">
@@ -547,14 +547,14 @@ export default function HomePage() {
           <div className="flex gap-3">
             <Button
               onClick={resetQuiz}
-              className="flex-1 py-3 bg-white hover:bg-gray-100 text-indigo-600 font-semibold rounded-xl border-2 border-white"
+              className="flex-1 py-3 bg-white hover:bg-gray-100 text-red-600 font-semibold rounded-xl border-2 border-white"
             >
               <RotateCcw className="w-5 h-5 mr-2" />
               Try Again
             </Button>
             <Button
               onClick={resetQuiz}
-              className="flex-1 py-3 bg-white hover:bg-gray-100 text-indigo-600 font-semibold rounded-xl border-2 border-white"
+              className="flex-1 py-3 bg-white hover:bg-gray-100 text-red-600 font-semibold rounded-xl border-2 border-white"
             >
               <Plus className="w-5 h-5 mr-2" />
               New Quiz
