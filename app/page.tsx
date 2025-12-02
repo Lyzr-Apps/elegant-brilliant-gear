@@ -258,13 +258,13 @@ export default function HomePage() {
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-bold text-gray-900">Quiz Master</CardTitle>
             <CardDescription className="text-gray-600 mt-2">
-              Test your knowledge on any topic
+              Ready to challenge yourself? Let's test your knowledge
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-gray-900 mb-3">
-                Topic
+                What would you like to learn about?
               </label>
               <Input
                 type="text"
@@ -277,7 +277,7 @@ export default function HomePage() {
 
             <div>
               <label className="block text-sm font-semibold text-gray-900 mb-3">
-                Difficulty
+                Pick your difficulty level
               </label>
               <div className="flex gap-2">
                 {(['Easy', 'Medium', 'Hard'] as const).map(diff => (
@@ -298,7 +298,7 @@ export default function HomePage() {
 
             <div>
               <label className="block text-sm font-semibold text-gray-900 mb-3">
-                Number of Questions
+                How many questions? (Go at your own pace)
               </label>
               <div className="flex gap-2">
                 {([5, 10, 15] as const).map(count => (
@@ -320,11 +320,14 @@ export default function HomePage() {
             <Button
               onClick={startQuiz}
               disabled={!quizState.topic.trim()}
-              className="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl mt-4"
+              className="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Start Quiz
+              Let's Go
               <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
+            <p className="text-xs text-gray-500 text-center mt-2">
+              {!quizState.topic.trim() ? 'Please enter a topic to begin' : 'You are all set!'}
+            </p>
           </CardContent>
         </Card>
       )}
@@ -339,7 +342,7 @@ export default function HomePage() {
                 Question {quizState.currentQuestionIndex + 1} of {quizState.totalQuestions}
               </span>
               <span className="text-white text-sm">
-                Score: {quizState.score}
+                Score: {quizState.score}/{quizState.totalQuestions}
               </span>
             </div>
             <Progress
@@ -395,7 +398,12 @@ export default function HomePage() {
                       : 'bg-red-100 text-red-800'
                   }`}
                 >
-                  {quizState.feedback}
+                  <div className="flex items-center gap-2">
+                    <span>{quizState.feedback.startsWith('Correct') ? 'Well done!' : 'No worries!'}</span>
+                  </div>
+                  <div className="mt-2 text-xs font-normal">
+                    {quizState.feedback}
+                  </div>
                 </div>
               )}
 
@@ -432,7 +440,8 @@ export default function HomePage() {
           {/* Score Display */}
           <Card className="rounded-3xl border-0 shadow-lg">
             <CardContent className="pt-12 text-center">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Quiz Complete!</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">You did it!</h2>
+              <p className="text-gray-600 mb-8">Here's how you performed</p>
 
               {/* Circular Score */}
               <div className="flex justify-center mb-8">
@@ -487,11 +496,11 @@ export default function HomePage() {
                 {performanceBadge.label}
               </Badge>
 
-              <p className="text-gray-600 text-lg mb-8">
-                {scorePercentage >= 90 && 'Excellent work! You truly mastered this topic!'}
-                {scorePercentage >= 70 && scorePercentage < 90 && 'Great performance! Keep it up!'}
-                {scorePercentage >= 50 && scorePercentage < 70 && 'Good attempt! Review the material and try again.'}
-                {scorePercentage < 50 && 'Keep learning! Review the topics and practice more.'}
+              <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                {scorePercentage >= 90 && 'Outstanding! You absolutely crushed this quiz. You really know your stuff!'}
+                {scorePercentage >= 70 && scorePercentage < 90 && 'Fantastic job! You clearly have a solid grasp of this topic. Keep pushing forward!'}
+                {scorePercentage >= 50 && scorePercentage < 70 && 'Good effort! You\'re on the right track. A little more practice and you\'ll master this topic.'}
+                {scorePercentage < 50 && 'Good try! Don\'t get discouraged. Learning takes time, and every attempt makes you stronger!'}
               </p>
             </CardContent>
           </Card>
@@ -499,7 +508,10 @@ export default function HomePage() {
           {/* Question Breakdown */}
           <Card className="rounded-3xl border-0 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold text-gray-900">Question Breakdown</CardTitle>
+              <CardTitle className="text-2xl font-bold text-gray-900">Let's Review Your Answers</CardTitle>
+              <CardDescription className="text-gray-600 mt-1">
+                See which questions you nailed and where to focus next time
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
@@ -550,14 +562,14 @@ export default function HomePage() {
               className="flex-1 py-3 bg-white hover:bg-gray-100 text-red-600 font-semibold rounded-xl border-2 border-white"
             >
               <RotateCcw className="w-5 h-5 mr-2" />
-              Try Again
+              Retake Quiz
             </Button>
             <Button
               onClick={resetQuiz}
               className="flex-1 py-3 bg-white hover:bg-gray-100 text-red-600 font-semibold rounded-xl border-2 border-white"
             >
               <Plus className="w-5 h-5 mr-2" />
-              New Quiz
+              Try Something New
             </Button>
           </div>
         </div>
